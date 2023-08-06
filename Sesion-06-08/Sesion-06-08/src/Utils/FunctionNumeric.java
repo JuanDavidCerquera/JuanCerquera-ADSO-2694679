@@ -11,110 +11,16 @@ package Utils;
 public class FunctionNumeric {
 
     private Double numero;
-    private int entero; 
 
-    protected int getEntero() {
-        return entero;
-    }
-
-    public void setEntero(int entero) {
-        this.entero = entero;
-    }
-    public int InputEnteroScanner(String mensaje){
-        InputEntero(mensaje, 1);
-        return this.getEntero();
-    }
-        public int InputEnteroJOption(String mensaje){
-        InputEntero(mensaje, 2);
-        return this.getEntero();
-    }
-        
-        
-    private void InputEntero(String mensaje, int tipo) {
-        Boolean validar = false;
-        FunctionString fs = new FunctionString();
-
-        //Validar que se ingrese el dato correcto
-        while (validar == false) {
-            try {
-                if(tipo==1){
-                    this.setEntero(Integer.parseInt(fs.InputScanner(mensaje)));
-                }else{
-                    this.setEntero(Integer.parseInt(fs.InputJOptionPane(mensaje)));
-                }
-                validar = true;
-            } catch (Exception e) {
-                if (tipo==1) {
-                    fs.ShowScanner("Ha ingresado un dato no válido. ");
-                }else{
-                    fs.ShowJOptionPane("Ha ingresado un dato no válido. ");
-                }
-            }
-        }        
-    }
-    public int InputEnteroRangeScanner(String mensaje, int min, int max){
-        do {            
-            InputEntero(mensaje,1);
-        } while (this.getEntero() < min || this.getEntero() > max);
-        
-        return this.getEntero();
-    }
-        public int InputEnteroRangeJOption(String mensaje, int min, int max){
-        do {            
-            InputEntero(mensaje,2);
-        } while (this.getEntero() < min || this.getEntero() > max);
-        
-        return this.getEntero();
-    }
-        public int InputEnteroJOptionPositivo(String mensaje){
-        do {            
-            InputEntero(mensaje,2);
-        } while (this.getEntero() <0);
-        
-        return this.getEntero();
-    }
-        public int InputEnteroJOptionNegativo(String mensaje){
-        do {            
-            InputEntero(mensaje,2);
-        } while (this.getEntero() >=0);
-        
-        return this.getEntero();
-    }
-        public int InputEnteroScannerPositivo(String mensaje){
-        do {            
-            InputEntero(mensaje,1);
-        } while (this.getEntero() <0);
-        
-        return this.getEntero();
-    }
-        public int InputEnteroScannerNegativo(String mensaje){
-        do {            
-            InputEntero(mensaje,1);
-        } while (this.getEntero() >=0);
-        
-        return this.getEntero();
-    }
-        
-    
-
-    protected Double getNumero() {
+    private Double getNumero() {
         return numero;
     }
 
     private void setNumero(Double numero) {
         this.numero = numero;
     }
-
-    public Double InputNumericScanner(String mensaje) {
-        InputNumeric(mensaje, 1);
-        return this.getNumero();
-    }
-
-    public Double InputNumericJOptionPane(String mensaje) {
-        InputNumeric(mensaje, 2);
-        return this.getNumero();
-    }
     
+    //Validar la captura de cualquier nuemro real
     private void InputNumeric(String mensaje, int tipo) {
         Boolean validar = false;
         FunctionString fs = new FunctionString();
@@ -136,10 +42,22 @@ public class FunctionNumeric {
                 }
             }
         }        
+    }    
+    
+    //Capturar cualquier real por Scanner
+    public Double InputDoubleNumericScanner(String mensaje) {
+        InputNumeric(mensaje, 1);
+        return this.getNumero();
     }
     
+    //Capturar cualquier real por JOptionPane
+    public Double InputDoubleNumericJOptionPane(String mensaje) {
+        InputNumeric(mensaje, 2);
+        return this.getNumero();
+    }
     
-    public Double InputNumericRangeScanner(String mensaje, Double min, Double max) {
+    //Capturar cualquier número double por rango con scanner
+    public Double InputDoubleNumericRangeScanner(String mensaje, Double min, Double max) {
         do {            
             InputNumeric(mensaje,1);
         } while (this.getNumero() < min || this.getNumero() > max);
@@ -147,42 +65,103 @@ public class FunctionNumeric {
         return this.getNumero();
     }
     
-    public Double InputNumericRangeJOptionPane(String mensaje, Double min, Double max) {
+    //Capturar cualquier número double por rango con JOptionPane
+    public Double InputDoubleNumericRangeJOptionPane(String mensaje, Double min, Double max) {
         do {            
             InputNumeric(mensaje,2);
         } while (this.getNumero() < min || this.getNumero() > max);
         
         return this.getNumero();
     }
-        public Double InputNumericJOptionPanePositivos(String mensaje) {
+    
+    //Capturar número positivo con scanner
+    public Double InputDoubleNumericPositiveScanner(String mensaje) {
         do {            
-            InputNumeric(mensaje,2);
-        } while (this.getNumero() < 0);
+            InputNumeric(mensaje,1);
+        } while (this.getNumero() <= 0);
         
         return this.getNumero();
     }
-            public Double InputNumericJOptionPaneNegativos(String mensaje) {
+    
+    //Capturar número positivo con JOptionPane
+    public Double InputDoubleNumericPositiveJOptionPane(String mensaje) {
+        do {            
+            InputNumeric(mensaje,2);
+        } while (this.getNumero() <= 0);
+        
+        return this.getNumero();
+    }
+    
+    //Capturar número negative con scanner
+    public Double InputDoubleNumericNegativeScanner(String mensaje) {
+        do {            
+            InputNumeric(mensaje,1);
+        } while (this.getNumero() >= 0);
+        
+        return this.getNumero();
+    }
+    
+    //Capturar número negative con scanner
+    public Double InputDoubleNumericNegativeJOptionPane(String mensaje) {
         do {            
             InputNumeric(mensaje,2);
         } while (this.getNumero() >= 0);
         
         return this.getNumero();
     }
-            
-        public Double InputNumericScannerPositivo(String mensaje) {
-        do {            
-            InputNumeric(mensaje,1);
-        } while (this.getNumero() < 0);
-        
-        return this.getNumero();
+    
+    /************************
+     * 
+     * @param Capturar solo enteros
+     * @return Integer
+     */
+    
+    //Capturar cualquier entero por Scanner
+    public Integer InputIntegerNumericScanner(String mensaje) {
+        InputDoubleNumericScanner(mensaje);
+        return this.getNumero().intValue();
     }
-            public Double InputNumericScannerNegativo(String mensaje) {
-        do {            
-            InputNumeric(mensaje,1);
-        } while (this.getNumero() >=0);
-        
-        return this.getNumero();
+    
+    //Capturar cualquier entero por JOptionPane
+    public Integer InputIntegerNumericJOptionPane(String mensaje) {
+        InputDoubleNumericJOptionPane(mensaje);
+        return this.getNumero().intValue();
     }
-            
-            
+    
+    //Capturar cualquier número entero por rango con scanner
+    public Integer InputIntegerNumericRangeScanner(String mensaje, Double min, Double max) {
+        InputDoubleNumericRangeScanner(mensaje,min,max);
+        return this.getNumero().intValue();
+    }
+    
+    //Capturar cualquier número entero por rango con JOptionPane
+    public Integer InputIntegerNumericRangeJOptionPane(String mensaje, Double min, Double max) {
+        InputDoubleNumericRangeJOptionPane(mensaje,min,max);
+        return this.getNumero().intValue();
+    }
+    
+    //Capturar número positivo con scanner
+    public Integer InputIntegerNumericPositiveScanner(String mensaje) {
+        InputDoubleNumericPositiveScanner(mensaje);
+        return this.getNumero().intValue();
+    }
+    
+    //Capturar número positive con JOptionPane
+    public Integer InputIntegerNumericPositiveJOptionPane(String mensaje) {
+        InputDoubleNumericPositiveScanner(mensaje);
+        return this.getNumero().intValue();
+    }
+    
+    //Capturar número negative con scanner
+    public Integer InputIntegerNumericNegativeScanner(String mensaje) {
+        InputDoubleNumericNegativeScanner(mensaje);
+        return this.getNumero().intValue();
+    }
+    
+    //Capturar número negative con JOptionPane
+    public Integer InputIntegerNumericNegativeJOptionPane(String mensaje) {
+        InputDoubleNumericNegativeScanner(mensaje);
+        return this.getNumero().intValue();
+    }
+
 }
